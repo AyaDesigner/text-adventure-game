@@ -1,94 +1,85 @@
-
-//----------------CHAPTER STRUCTURE
-
-const chapter5 = {
-    phrase: "You survived!!!",
-    img: "https://www.colemanconcierge.com/wp-content/uploads/2017/11/Ghosts-and-Legends-You-Survived.jpg",
+chapter5 = {
+    phrase: "Good weather, nice people, tasty food and mountains. Perfect choice!",
     buttonChoice1: { text: "", nextChapter: null },
-    buttonChoice2: { text: "", nextChapter: null }
+    buttonChoice2: { text: "", nextChapter: null },
+    img: "https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2018/03/italy-vs-spain-cover-image.jpg"
 }
-    
-const chapter4 = {
-    phrase: "You died!!!",
-    img: "https://i.kym-cdn.com/entries/icons/facebook/000/029/198/Dark_Souls_You_Died_Screen_-_Completely_Black_Screen_0-2_screenshot.jpg",
+
+
+chapter4 = {
+    phrase: "Spain is your country!",
     buttonChoice1: { text: "", nextChapter: null },
-    buttonChoice2: { text: "", nextChapter: null }
-}
-
-const chapter3 = {
-    phrase: "The ghost is here right in front of you! You have to choose!",
-    img: "https://dnbstories.com/wp-content/uploads/2016/09/Ghosts.jpg",
-    buttonChoice1: { text: "Run!", nextChapter: chapter5 },
-    buttonChoice2: { text: "Fight!", nextChapter: chapter4 }
-}
-
-const chapter2 = {
-    phrase: "You entered the room and you see the ghost. What do you do?",
-    img:"https://images.unsplash.com/photo-1505599950318-db5a5093ce0c?ixlib=rb-1.2.1&q=50&fm=jpg&crop=entropy&cs=tinysrgb&w=720&fit=max&ixid=eyJhcHBfaWQiOjEyMjZ9",
-    buttonChoice1: { text: "Get closer", nextChapter: chapter3 },
-    buttonChoice2: { text: "Hide", nextChapter: chapter5 }
-}
-
-const chapter1 = {
-    phrase: "You wake up in the very dark and cold room. You open your eyes and you see the door. Would you open that door?",
-    img: "https://theroyalliar.files.wordpress.com/2019/05/sv2t3.jpg?w=640",
-    buttonChoice1: { text: "Yes", nextChapter: chapter2 },
-    buttonChoice2: { text: "No", nextChapter: chapter5 }
+    buttonChoice2: { text: "", nextChapter: null },
+    img: "https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2018/03/italy-vs-spain-cover-image.jpg"
 }
 
 
+chapter3 = {
+    phrase: "Maybe you should go in Italy?",
+    buttonChoice1: { text: "Yes", nextChapter: chapter5 },
+    buttonChoice2: { text: "No", nextChapter: chapter4 },
+    img: "https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2018/03/italy-vs-spain-cover-image.jpg"
+}
+
+
+chapter2 = {
+    phrase: "Good weather, nice people, tasty food. What do you miss?",
+    buttonChoice1: { text: "Mountains", nextChapter: chapter3 },
+    buttonChoice2: { text: "Nothing", nextChapter: chapter4 },
+    img: "https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2018/03/italy-vs-spain-cover-image.jpg"
+}
+
+
+chapter1 = {
+    phrase: "Where do you want to live?",
+    buttonChoice1: { text: "Spain", nextChapter: chapter2 },
+    buttonChoice2: { text: "Italy", nextChapter: chapter5 },
+    img: "https://d27k8xmh3cuzik.cloudfront.net/wp-content/uploads/2018/03/italy-vs-spain-cover-image.jpg"
+}
 
 
 
-//----------------LOGIC
-
-// This function has only the logic to display the chapter in the HTML
-// (phrase and img in the #wholestory div  and the buttons in the #buttons div )
 function changeChapter(chapterToShow) {
 
-   
-    //append a new <p> to the #wholestory div 
-    const paragraph = document.createElement("p");
-    const text = document.createTextNode(chapterToShow.phrase);
-    paragraph.appendChild(text);
-    document.querySelector("#wholestory").appendChild(paragraph);
-
-    const img = document.createElement("img");
-    img.src = chapterToShow.img;
-    img.width ="600";
-    document.querySelector("#wholestory").appendChild(img);
-
- 
-
-
-    //remove all existing buttons from the #buttons div
     document.querySelector("#buttons").innerHTML = "";
 
-    //if there is a nextChapter in buttonChoice1 we add the button 
-    if (chapterToShow.buttonChoice1.nextChapter !== null) {
 
-        const button1 = document.createElement("input");
-        button1.type = "button";
-        button1.value = chapterToShow.buttonChoice1.text;
-        button1.addEventListener("click", function () {
+    const allphrases = document.querySelector("#allphrases");
+
+
+    let paragraph = document.createElement("p");
+    let text = document.createTextNode(chapterToShow.phrase);
+    paragraph.appendChild(text);
+    allphrases.appendChild(paragraph);
+
+
+    let myImage = document.createElement("img");
+    myImage.src = chapterToShow.img;
+    allphrases.appendChild(myImage);
+
+    //SCROLL TO BOTTOM
+    allphrases.scrollTop = allphrases.scrollHeight;
+
+
+
+    let myButton1 = document.createElement("input");
+    let myButton2 = document.createElement("input");
+
+    if (chapterToShow.buttonChoice1.nextChapter !== null && chapterToShow.buttonChoice2.nextChapter !== null) {
+        myButton1.type = "button";
+        myButton1.value = chapterToShow.buttonChoice1.text;
+        myButton1.addEventListener('click', function () {
             changeChapter(chapterToShow.buttonChoice1.nextChapter);
         }, false);
+        document.querySelector("#buttons").appendChild(myButton1);
 
-        document.querySelector("#buttons").appendChild(button1);
-    }
-
-    //if there is a nextChapter in buttonChoice2 we add the button 
-    if (chapterToShow.buttonChoice2.nextChapter !== null) {
-
-
-        const button2 = document.createElement("input");
-        button2.type = "button";
-        button2.value = chapterToShow.buttonChoice2.text;
-        button2.addEventListener("click", function () {
+        myButton2.type = "button";
+        myButton2.value = chapterToShow.buttonChoice2.text;
+        myButton2.addEventListener('click', function () {
             changeChapter(chapterToShow.buttonChoice2.nextChapter);
         }, false);
+        document.querySelector("#buttons").appendChild(myButton2);
 
-        document.querySelector("#buttons").appendChild(button2);
     }
 
 
