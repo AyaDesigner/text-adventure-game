@@ -59,6 +59,8 @@ function changeChapter(chapterToShow) {
     const img = document.createElement("img");
     img.src = chapterToShow.img;
     img.width = "600";
+    img.height = "400";
+
     wholestory.appendChild(img);
 
 
