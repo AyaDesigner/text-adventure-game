@@ -7,7 +7,7 @@ const chapter5 = {
     buttonChoice1: { text: "", nextChapter: null },
     buttonChoice2: { text: "", nextChapter: null }
 }
-    
+
 const chapter4 = {
     phrase: "You died!!!",
     img: "https://i.kym-cdn.com/entries/icons/facebook/000/029/198/Dark_Souls_You_Died_Screen_-_Completely_Black_Screen_0-2_screenshot.jpg",
@@ -24,7 +24,7 @@ const chapter3 = {
 
 const chapter2 = {
     phrase: "You entered the room and you see the ghost. What do you do?",
-    img:"https://images.unsplash.com/photo-1505599950318-db5a5093ce0c?ixlib=rb-1.2.1&q=50&fm=jpg&crop=entropy&cs=tinysrgb&w=720&fit=max&ixid=eyJhcHBfaWQiOjEyMjZ9",
+    img: "https://images.unsplash.com/photo-1505599950318-db5a5093ce0c?ixlib=rb-1.2.1&q=50&fm=jpg&crop=entropy&cs=tinysrgb&w=720&fit=max&ixid=eyJhcHBfaWQiOjEyMjZ9",
     buttonChoice1: { text: "Get closer", nextChapter: chapter3 },
     buttonChoice2: { text: "Hide", nextChapter: chapter5 }
 }
@@ -46,19 +46,21 @@ const chapter1 = {
 // (phrase and img in the #wholestory div  and the buttons in the #buttons div )
 function changeChapter(chapterToShow) {
 
-   
+
     //append a new <p> to the #wholestory div 
     const wholestory = document.querySelector("#wholestory");
-    
+
+    const img = document.createElement("img");
+    img.src = chapterToShow.img;
+    img.width = "300";
+    wholestory.appendChild(img);
+
     const paragraph = document.createElement("p");
     const text = document.createTextNode(chapterToShow.phrase);
     paragraph.appendChild(text);
     wholestory.appendChild(paragraph);
 
-    const img = document.createElement("img");
-    img.src = chapterToShow.img;
-    img.width ="600";
-    wholestory.appendChild(img);
+
 
     //SCROLL TO BOTTOM
     wholestory.scrollTop = wholestory.scrollHeight;
