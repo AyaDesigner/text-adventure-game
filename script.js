@@ -46,19 +46,22 @@ const chapter1 = {
 // (phrase and img in the #wholestory div  and the buttons in the #buttons div )
 function changeChapter(chapterToShow) {
 
-
+    //remove all existing buttons from the #buttons div
+    document.querySelector("#buttons").innerHTML = "";
     //append a new <p> to the #wholestory div 
     const wholestory = document.querySelector("#wholestory");
-
-    const img = document.createElement("img");
-    img.src = chapterToShow.img;
-    img.width = "300";
-    wholestory.appendChild(img);
 
     const paragraph = document.createElement("p");
     const text = document.createTextNode(chapterToShow.phrase);
     paragraph.appendChild(text);
     wholestory.appendChild(paragraph);
+
+    const img = document.createElement("img");
+    img.src = chapterToShow.img;
+    img.width = "600";
+    wholestory.appendChild(img);
+
+
 
 
 
@@ -66,8 +69,7 @@ function changeChapter(chapterToShow) {
     wholestory.scrollTop = wholestory.scrollHeight;
 
 
-    //remove all existing buttons from the #buttons div
-    document.querySelector("#buttons").innerHTML = "";
+
 
     //if there is a nextChapter in buttonChoice1 we add the button 
     if (chapterToShow.buttonChoice1.nextChapter !== null) {
