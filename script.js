@@ -48,17 +48,20 @@ function changeChapter(chapterToShow) {
 
    
     //append a new <p> to the #wholestory div 
+    const wholestory = document.querySelector("#wholestory");
+    
     const paragraph = document.createElement("p");
     const text = document.createTextNode(chapterToShow.phrase);
     paragraph.appendChild(text);
-    document.querySelector("#wholestory").appendChild(paragraph);
+    wholestory.appendChild(paragraph);
 
     const img = document.createElement("img");
     img.src = chapterToShow.img;
     img.width ="600";
-    document.querySelector("#wholestory").appendChild(img);
+    wholestory.appendChild(img);
 
- 
+    //SCROLL TO BOTTOM
+    wholestory.scrollTop = wholestory.scrollHeight;
 
 
     //remove all existing buttons from the #buttons div
